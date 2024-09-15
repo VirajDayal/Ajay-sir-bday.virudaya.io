@@ -236,6 +236,22 @@
             background-color: #357ABD;
         }
 
+/* Styling the Back button */
+.back-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #FF6347; /* Tomato color for visibility */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.back-button:hover {
+    background-color: #e5533c; /* Darker shade on hover */
+}
+
         /* Responsive design for mobile devices */
         @media (max-width: 768px) {
             .container {
@@ -354,16 +370,20 @@
         </div>
     </div>
 
-    <!-- Modal for image preview -->
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-            <img id="modalImage" src="" alt="Image Preview">
-            <a id="downloadLink" href="" download>
-                <button class="download-button">Download</button>
-            </a>
-        </div>
+    <!-- Updated Modal for image preview -->
+<div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="Image Preview">
+        <a id="downloadLink" href="" download>
+            <button class="download-button">Download</button>
+        </a>
+        <!-- Back Button -->
+        <button class="back-button" onclick="closeModal()">Back</button>
     </div>
+</div>
+
+
 
     <script>
         // Function to open modal and show clicked image
