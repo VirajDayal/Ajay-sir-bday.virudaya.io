@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Happy Birthday, Principal Sir</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles with background image */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://i.pinimg.com/564x/55/5e/67/555e67f9fff46208e5e2d2860d168cf5.jpg') no-repeat center center fixed;
+            background-size: cover; /* Make sure the background covers the entire screen */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Dark overlay to improve text visibility over the background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Make sure it's behind the content */
+        }
+
+        /* Main container with stylish card design */
+        .container {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.497);
+            width: 100%;
+            max-width: 800px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            backdrop-filter: blur;
+            z-index: 1; /* Content is on top of overlay */
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        /* Smooth fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Title and subtitle styles */
+        .container h1 {
+            font-size: 3em;
+            color: #FF6347; /* Tomato color */
+            margin-bottom: 5px;
+        }
+
+        .container h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #4a90e2; /* Blue for modern touch */
+        }
+
+        #sir{
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        /* Profile image with circular design and shadow */
+        .container img {
+            width: 450px;
+            height: 450px;
+            object-fit: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 5px solid #fff;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover effect on profile image */
+        .container img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Message text with modern fonts and spacing */
+        .message {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Highlighted wish with modern touch */
+        .wish {
+            font-size: 1.8em;
+            color: #2E8B57; /* Sea green */
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        /* Media section with creative spacing */
+        .media-section {
+            margin: 30px 0;
+        }
+
+        /* Heading for media section */
+        .media-section h3 {
+            font-size: 1.4em;
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+
+        /* Stylish audio and video players */
+        .media-section audio,
+        .media-section video {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 10px;
+            margin: 10px auto;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer with personal sign-off */
+        .footer {
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 30px;
+        }
+
+        /* Image gallery section */
+        .gallery-section {
+            margin: 30px 0;
+        }
+
+        /* Gallery heading */
+        .gallery-section h3 {
+            font-size: 1.6em;
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        /* Image gallery with no forced sizes */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Image styles that respect original size */
+        .gallery img {
+            border-radius: 10px;
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        /* Hover effect for gallery images */
+        .gallery img:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        /* Close button for modal */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .download-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .download-button:hover {
+            background-color: #357ABD;
+        }
+
+        /* Responsive design for mobile devices */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .container h1 {
+                font-size: 2.5em;
+            }
+
+            .container h2 {
+                font-size: 1.2em;
+            }
+
+            .container img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .message {
+                font-size: 1em;
+            }
+
+            .wish {
+                font-size: 1.4em;
+            }
+
+            .media-section h3 {
+                font-size: 1.2em;
+            }
+
+            /* Gallery responsive behavior */
+            .gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Adding Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Happy Birthday, Sir!</h1>
+        <h2>Ajay Kumar Gupta</h2>
+        <img id="sir" src="sir.jpg" alt="Principal's Picture">
+        
+        <p class="message">
+            Dear Sir, today I want to express my deepest gratitude and heartfelt wishes on your special day. 
+            You gave me more than just an education—you gave me an identity when you named me <strong>Dipanshu Kumar</strong>. 
+            Your guidance and wisdom have been invaluable throughout my time at school, and I will always cherish the lessons I learned under your care.
+        </p>
+        <p class="message">
+            Though I have passed out of school this March, I will carry your teachings and values with me wherever I go.
+        </p>
+        <p class="wish">May your birthday be as remarkable as the influence you've had on my life!</p>
+
+        <!-- Audio Section 1 -->
+        <div class="media-section">
+            <h3>Birthday Wish - In My Way</h3>
+            <audio controls>
+                <source src="audio1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <em>Dear Sir, This Voice is not exactly me, It's my AI clone Voice.</em>
+        </div>
+
+        <!-- Audio Section 2 -->
+        <div class="media-section">
+            <h3>Birthday Wish - In My Song</h3>
+            <audio controls>
+                <source src="audio2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <em>Dear Sir, This Song is not in my voice, But I had Created this Using AI. </em>
+        </div>
+
+        <!-- Video Section -->
+        <div class="media-section">
+            <h3>Special Birthday Video</h3>
+            <video controls>
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Image Gallery Section -->
+        <div class="gallery-section">
+            <h3>Memorable Moments with Principal Sir</h3>
+            <div class="gallery">
+                <img src="image1.jpg" alt="Memory 1" onclick="openModal('image1.jpg')">
+                <img src="image2.jpg" alt="Memory 2" onclick="openModal('image2.jpg')">
+                <img src="image3.jpg" alt="Memory 3" onclick="openModal('image3.jpg')">
+                <img src="image4.jpg" alt="Memory 4" onclick="openModal('image4.jpg')">
+                <img src="image5.jpg" alt="Memory 5" onclick="openModal('image5.jpg')">
+                <img src="image6.jpg" alt="Memory 6" onclick="openModal('image6.jpg')">
+                <img src="image7.jpg" alt="Memory 7" onclick="openModal('image7.jpg')">
+                <img src="image8.jpg" alt="Memory 8" onclick="openModal('image8.jpg')">
+                <img src="image9.jpg" alt="Memory 9" onclick="openModal('image9.jpg')">
+                <img src="image10.jpg" alt="Memory 10" onclick="openModal('image10.jpg')">
+                <img src="image11.jpg" alt="Memory 11" onclick="openModal('image11.jpg')">
+                <img src="image12.jpg" alt="Memory 12" onclick="openModal('image12.jpg')">
+                <img src="image13.jpg" alt="Memory 13" onclick="openModal('image13.jpg')">
+                <img src="image14.jpg" alt="Memory 14" onclick="openModal('image14.jpg')">
+                <img src="image15.jpg" alt="Memory 15" onclick="openModal('image15.jpg')">
+                <img src="image16.jpg" alt="Memory 16" onclick="openModal('image16.jpg')">
+            </div>
+        </div>
+
+        <div class="footer">
+            With heartfelt gratitude,<br>
+            <strong>Dipanshu Kumar</strong>
+        </div>
+        <div class="footer">
+            Powered By<br>
+            <strong>ViruDaya</strong>
+        </div>
+    </div>
+
+    <!-- Modal for image preview -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Image Preview">
+            <a id="downloadLink" href="" download>
+                <button class="download-button">Download</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Function to open modal and show clicked image
+        function openModal(imageSrc) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            var downloadLink = document.getElementById("downloadLink");
+
+            modal.style.display = "flex"; // Show modal
+            modalImg.src = imageSrc; // Set image in modal
+            downloadLink.href = imageSrc; // Set download link
+        }
+
+        // Function to close modal
+        function closeModal() {
+            var modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
